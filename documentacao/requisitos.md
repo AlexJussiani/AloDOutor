@@ -21,6 +21,10 @@ O time de desenvolvimento conversou com o responsável administrativo pela clín
 
 ![Cadastro do Médico](./imagens/01-CadastroMedico.png)
 
+![Cadastro do Paciente](./imagens/02-CadastroPaciente.png)
+
+![Agendamento Consulta](./imagens/03-AgendamentoConsulta.png)
+
 
 
 
