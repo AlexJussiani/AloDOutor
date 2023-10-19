@@ -20,9 +20,11 @@ Nesse momento foi solicitado que a informatização fosse realizada sem melhoria
 O time de desenvolvimento conversou com o responsável administrativo pela clínica e identificou os seguintes pontos:
 
 ![Cadastro do Médico](./imagens/01-CadastroMedico.png)
-
+</br>
+</br>
 ![Cadastro do Paciente](./imagens/02-CadastroPaciente.png)
-
+</br>
+</br>
 ![Agendamento Consulta](./imagens/03-AgendamentoConsulta.png)
 
 
@@ -44,63 +46,56 @@ O time de desenvolvimento conversou com o responsável administrativo pela clín
 ### Critérios de Aceite
 
 - Cadastro de Médico 
-    - O médico não pode ser cadastrado sem nome, CRM, especialidade e turno de atendimento
-    - Não pode haver dois médicos com o mesmo CRM
-    - O proprio medico pode se cadastrar porém o RH precisa validar o seu registro
-    - O médico só pode alterar o seu horário de atentimento do dia 01 ao dia 15 e a alteração só é válida para a agenda do mês seguinte
-    - O próprio médico pode se tornar indisponível para atendimento. Essa alteração só pode ser feita de 01 a 15 do mês e só é válida para a agenda do mês seguinte
-    - O médico só pode estar cadastrado com uma especialidade, porém ela deve ser escolhida de uma lista de especialidades pré-cadastradas
+    - As seguintes informações são obrigatórias no cadastro:
+        - Nome
+        - CPF
+        - CRM
+        - Telefone
+        - Endereço
+        - Estado
+        - CEP
+    - A especialidade é opcional
+    - Um médico pode atender em mais de uma especialidade
+    - Não podem haver dois médicos com o mesmo CRM
+    - Não podem haver dois médicos com o mesmo CPF
+    
 
 </br>
 
 - Cadastro do Paciente
-    - O Paciente não pode ser cadastrado sem nome, CPF, data de nascimento e telefone
-    - Não pode haver dois pacientes com o mesmo CPF
-    - O próprio paciente pode se cadastrar no sistema porém algum recepcionista precisa validar o cadastro
-    - O Prontuário Médico do Paciente deve receber um número único após a aprovação do cadastro do paciente.
+    - As seguintes informações são obrigatórias:
+        - Nome
+        - CPF
+        - Idade
+        - Telefone
+        - Endereço
+        - Estado
+        - CEP
+
+    - Não podem haver dois pacientes com o mesmo CPF
     
 <br>
 
-- Geração da Agenda
-    - A agenda só pode ser gerada para o mês seguinte a partir do dia 15 do mês atual
-    - A agenda só pode ser gerada para o mês seguinte para médicos ativos
-    - As consultas tem 30min de duração
 
-<br>
 
 - Marcação de Consultas
-    - O Paciente pode marcar consulta desde que existam horários livres para o médico desejado
+    - O Paciente e o Médico já devem estar cadastrados
+    - Só podem ser considerados médicos que tem especialidade associada
+    - As consultas só podem ser agendadas para os seguites dias:
+        - Segunda-feira a Sexta-feira das 08h às 12h
+        - Segunda-feira a Sexta-feira das 14h às 18h
+    - Cada consulta tem duração de 1 hora obrigatoriamente
+    - Não há necessidade de considerar feriados
+    - As consultas devem ser agendadas com um mínimo de 2 horas de antecedência
     - O Paciente não pode marcar duas consultas no mesmo dia e horário
-    - A consulta pode ser cancelada pela Secretária ou pelo Paciente
-    - A secretária também pode marcar consultas para os Pacientes
-
-
-- Execução da Consulta
-    - O médico deve registrar a consulta no prontuário digital do paciente.
-    - Ele deve informar resultados de exames e anamnese do Paciente
-    - Ele só pode alterar pacientes que tenham consulta agendada naquele dia
-
+    - A consulta pode ser desativada pelos usuários do sistema
+   
 <br>
 
 - Controle de Acesso
-    - A administração da Clínica quer que o sistema tenha controle de acesso para os usuários com os seguintes perfis:
-        - Médico
-            - Pode se cadastrar e alterar seus horários de atendimento
-            - Pode registrar os dados da consulta do paciente
-            - Pode ver o histórico de consultas do paciente
-        - Secretária
-            - Pode marcar e cancelar consultas
-            - Pode gerar a agenda
-            - Aprova cadastro de Pacientes
-        - RH
-            - Aprova cadastro de Médicos            
-        - Paciente
-            - Pode marcar e cancelar consultas
-            - Pode se cadastrar no sistema
-        - Enfermagem
-            - Lista as consultas de um dia e turno específico            
-        - Administração
-            - Tem permissão total no sistema
+    - Todas as funcionalizadas devem ser executadas por um Funcionário previamente cadastrado no sistema
+    - O sistema pode ter somente um tipo de usuário que terá permissão total nas funcionalidades
+    - Se o usuário não estiver autenticado, ele não pode acessar as funcionalidades do sistema
 
 
 
