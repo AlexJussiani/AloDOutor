@@ -2,6 +2,7 @@
 using Identidade.API.Services;
 using AloDoutor.Core.Identidade;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace Identidade.API.Configuration
 {
@@ -28,17 +29,31 @@ namespace Identidade.API.Configuration
             return services;
         }
 
-        public static IApplicationBuilder UseApiConfiguration(this IApplicationBuilder app, IWebHostEnvironment env)
+        public static async Task<IApplicationBuilder> UseApiConfigurationAsync(this IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment() || env.IsStaging())
             {
                 app.UseDeveloperExceptionPage();
 
-                using (var scope = app.ApplicationServices.CreateScope())
+                using var scope = app.ApplicationServices.CreateScope();
+                
+                var services = scope.ServiceProvider;
+                var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+                var userManager = scope.ServiceProvider.GetRequiredService<UserManager<IdentityUser>>();
+                var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+
+                try
                 {
-                    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
                     dbContext.Database.Migrate();
+                    await IdentityConfig.CreateUserDefault(services);
                 }
+                catch (Exception ex)
+                {
+
+                    logger.LogError(ex, "Problema ao tentar migrar os dados.");
+                }
+                   
+                
             }
 
             app.UseHttpsRedirection();
